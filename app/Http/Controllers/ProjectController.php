@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,19 +25,15 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        return view('projects.create', ['project' => new Project()]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'color' => ['required', 'hex_color'],
-        ]);
+        $validated = $request->validated();
 
         $project = $request->user()->ownedProjects()->create($validated);
 
@@ -67,15 +64,19 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(ProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->validated());
+
+        return redirect()
+            ->route('projects.show', $project)
+            ->with('success', 'Projet mis à jour avec succès !');
     }
 
     /**
@@ -83,6 +84,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()
+            ->route('projects.index')
+            ->with('success', 'Projet supprimé avec succès !');
     }
 }

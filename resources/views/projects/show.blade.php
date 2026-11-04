@@ -8,6 +8,20 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
+            <a href="{{ route('projects.edit', $project) }}"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Modifier
+            </a>
+
+            <form action="{{ route('projects.destroy', $project) }}" method="POST"
+                onsubmit="return confirm('Supprimer ce projet et toutes ses tâches ?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Supprimer
+                </button>
+            </form>
+
             {{-- Section 1 : infos du projet --}}
             <div class="bg-white shadow-sm sm:rounded-lg p-6">
                 <div class="flex items-center gap-2">
