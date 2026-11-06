@@ -40,4 +40,9 @@ class Project extends Model
         return $this->hasMany(Tag::class);
     }
 
+    public function roleOf(User $user): ?string
+    {
+        return $this->members()->where('user_id', $user->id)->first()?->pivot->role;
+    }
+
 }

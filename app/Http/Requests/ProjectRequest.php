@@ -12,7 +12,13 @@ class ProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $project = $this->route('project');
+
+        if ($project === null) {
+            return true;
+        }
+
+        return $this->user()->can('update', $project);
     }
 
     /**

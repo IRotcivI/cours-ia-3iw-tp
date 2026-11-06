@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Http\Requests\ProjectRequest;
+use Gate;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,6 +50,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        Gate::authorize('view', $project);
         $project->load([
             'members',
             'tasks' => fn($query) => $query
@@ -64,6 +66,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        Gate::authorize('update', $project);
         return view('projects.edit', compact('project'));
     }
 
@@ -84,6 +87,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        Gate::authorize('delete', $project);
         $project->delete();
 
         return redirect()
