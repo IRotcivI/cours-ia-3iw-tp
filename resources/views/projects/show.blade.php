@@ -54,14 +54,16 @@
                     <div class="mt-2 p-2 border rounded">
                         <h4 class="text-md font-semibold">{{ $task->title }}</h4>
                         <p>{{ $task->description }}</p>
-                        <p>Statut : {{ $task->status }}</p>
+                        <p>Statut : {{ $task->status->label() }}</p>
                         <p>Tags :
                             @foreach ($task->tags as $tag)
                                 <span
-                                    class="inline-block px-2 py-1 text-xs font-semibold text-white bg-gray-500 rounded">{{ $tag->name }}</span>
+                                    class="inline-block px-2 py-1 text-xs font-semibold text-white rounded" style="background-color: {{ $tag->color }}";>{{ $tag->name }}</span>
                             @endforeach
                         </p>
-                        <p>Priorité : {{ $task->priority }}</p>
+                        <span class="px-2 py-1 text-xs font-semibold rounded {{ $task->priority->color() }}">
+                            {{ $task->priority->label() }}
+                        </span>
                         <p>Personne assignée : {{ $task->assignee?->name ?? 'Non assignée' }}</p>
                     </div>
                 @endforeach

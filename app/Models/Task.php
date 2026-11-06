@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 
 class Task extends Model
 {
@@ -25,7 +27,7 @@ class Task extends Model
         'parent_id',
     ];
 
-    public function project() : BelongsTo
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
@@ -65,6 +67,8 @@ class Task extends Model
         return [
             'due_date' => 'date',
             'completed_at' => 'datetime',
+            'status' => TaskStatus::class,
+            'priority' => TaskPriority::class,
         ];
     }
 }
