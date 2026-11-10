@@ -57,8 +57,8 @@
                         <p>Statut : {{ $task->status->label() }}</p>
                         <p>Tags :
                             @foreach ($task->tags as $tag)
-                                <span
-                                    class="inline-block px-2 py-1 text-xs font-semibold text-white rounded" style="background-color: {{ $tag->color }}";>{{ $tag->name }}</span>
+                                <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded"
+                                    style="background-color: {{ $tag->color }}" ;>{{ $tag->name }}</span>
                             @endforeach
                         </p>
                         <span class="px-2 py-1 text-xs font-semibold rounded {{ $task->priority->color() }}">
@@ -67,8 +67,17 @@
                         <p>Personne assignée : {{ $task->assignee?->name ?? 'Non assignée' }}</p>
                     </div>
                 @endforeach
-            </div>
 
+            </div>
+            <div class="flex items-center justify-between mb-2">
+
+                @can('create', [App\Models\Task::class, $project])
+                    <a href="{{ route('projects.tasks.create', $project) }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Nouvelle tâche
+                    </a>
+                @endcan
+            </div>
         </div>
     </div>
 </x-app-layout>
