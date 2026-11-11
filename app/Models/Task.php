@@ -69,6 +69,10 @@ class Task extends Model
                 $task->completed_at = $task->status === TaskStatus::Done ? now() : null;
             }
         });
+
+        static::deleting(function (Task $task) {
+            $task->subtasks()->delete();
+        });
     }
 
     protected function casts(): array

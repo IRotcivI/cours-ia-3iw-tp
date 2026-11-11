@@ -65,9 +65,19 @@
                             {{ $task->priority->label() }}
                         </span>
                         <p>Personne assignée : {{ $task->assignee?->name ?? 'Non assignée' }}</p>
+
                         @can('update', $task)
                             <a href="{{ route('tasks.edit', $task) }}"
                                 class="text-blue-600 hover:underline text-sm">Modifier</a>
+                        @endcan
+
+                        @can('delete', $task)
+                            <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline"
+                                onsubmit="return confirm('Supprimer cette tâche ?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:underline text-sm">Supprimer</button>
+                            </form>
                         @endcan
                     </div>
                 @endforeach

@@ -85,6 +85,12 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        Gate::authorize('delete', $task);
+
+        $task->delete();
+
+        return redirect()
+            ->route('projects.show', $task->project)
+            ->with('success', 'Tâche supprimée avec succès !');
     }
 }
