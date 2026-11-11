@@ -27,6 +27,11 @@ class Task extends Model
         'parent_id',
     ];
 
+    protected $attributes = [
+        'status' => 'todo',
+        'priority' => 2,
+    ];
+
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);

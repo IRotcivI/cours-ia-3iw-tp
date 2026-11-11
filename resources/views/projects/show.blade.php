@@ -79,6 +79,19 @@
                                 <button type="submit" class="text-red-600 hover:underline text-sm">Supprimer</button>
                             </form>
                         @endcan
+
+                        @can('create', [App\Models\Task::class, $project])
+                            <form action="{{ route('tasks.subtasks.store', $task) }}" method="POST"
+                                class="mt-2 ml-4 flex gap-2">
+                                @csrf
+                                <input type="text" name="title" placeholder="Nouvelle sous-tâche…"
+                                    class="border rounded px-2 py-1 text-sm flex-1">
+                                <button type="submit"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded">
+                                    Ajouter
+                                </button>
+                            </form>
+                        @endcan
                     </div>
                 @endforeach
 
