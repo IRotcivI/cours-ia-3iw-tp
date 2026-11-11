@@ -65,6 +65,10 @@
                             {{ $task->priority->label() }}
                         </span>
                         <p>Personne assignée : {{ $task->assignee?->name ?? 'Non assignée' }}</p>
+                        @can('update', $task)
+                            <a href="{{ route('tasks.edit', $task) }}"
+                                class="text-blue-600 hover:underline text-sm">Modifier</a>
+                        @endcan
                     </div>
                 @endforeach
 

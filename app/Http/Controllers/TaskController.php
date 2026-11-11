@@ -59,17 +59,21 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        Gate::authorize('update', $task);
+
+        $task->load('project.members');
+
+        return view('tasks.edit', compact('task'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
-        $task->project->roleOf($request->user);
+        Gate::authorize('update', $task);
 
-        $task->update($request->all());
+        $task->update($request->validated());
 
         return redirect()
             ->route('projects.show', $task->project)

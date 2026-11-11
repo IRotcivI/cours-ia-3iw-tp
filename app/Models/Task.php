@@ -62,6 +62,15 @@ class Task extends Model
         return $this->hasMany(Comment::class);
     }
 
+    protected static function booted(): void
+    {
+        static::saving(function (Task $task) {
+            if ($task->isDirty('status')) {
+                $task->completed_at = $task->status === TaskStatus::Done ? now() : null;
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [

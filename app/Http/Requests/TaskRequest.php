@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Project;
 use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 use Illuminate\Validation\Rule;
 
 class TaskRequest extends FormRequest
@@ -33,6 +34,7 @@ class TaskRequest extends FormRequest
             'assigned_to' => [
                 'nullable',
                 Rule::exists('project_user', 'user_id')->where('project_id', $this->project()->id),
+            'status' => ['sometimes', 'required', Rule::enum(TaskStatus::class)],     
             ],
         ];
     }
