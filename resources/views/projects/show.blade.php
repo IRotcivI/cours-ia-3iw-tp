@@ -52,7 +52,19 @@
                 <h3 class="text-lg font-semibold mb-2">Tâches</h3>
                 @foreach ($project->tasks as $task)
                     <div class="mt-2 p-2 border rounded">
-                        <h4 class="text-md font-semibold">{{ $task->title }}</h4>
+                        @can('update', $task)
+                            <form action="{{ route('tasks.toggle', $task) }}" method="POST" class="inline">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="text-lg" title="Changer le statut">
+                                    {{ $task->status === App\Enums\TaskStatus::Done ? '☑' : '☐' }}
+                                </button>
+                            </form>
+                        @endcan
+                        <h4
+                            class="font-semibold {{ $task->status === App\Enums\TaskStatus::Done ? 'line-through text-gray-400' : '' }}">
+                            {{ $task->title }}
+                        </h4>
                         <p>{{ $task->description }}</p>
                         <p>Statut : {{ $task->status->label() }}</p>
                         <p>Tags :

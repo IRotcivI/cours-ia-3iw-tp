@@ -39,4 +39,9 @@ class TaskPolicy
     {
         return in_array($task->project->roleOf($user), ['owner', 'editor']);
     }
+
+    public function toggle(User $user, Task $task): bool
+    {
+        return $this->update($user, $task) || $task->assigned_to === $user->id;
+    }
 }
