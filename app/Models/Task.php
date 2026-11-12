@@ -67,6 +67,19 @@ class Task extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function addSubtask(string $title, User $creator): Task
+    {
+        $subtask = $this->subtasks()->make([
+            'title' => $title,
+            'project_id' => $this->project_id,
+        ]);
+
+        $subtask->creator()->associate($creator);
+        $subtask->save();
+
+        return $subtask;
+    }
+
     protected static function booted(): void
     {
         static::saving(function (Task $task) {

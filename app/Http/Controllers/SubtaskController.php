@@ -18,12 +18,7 @@ class SubtaskController extends Controller
             'title' => ['required', 'string', 'max:255'],
         ]);
 
-        $subtask = $task->subtasks()->make([
-            ...$validated,
-            'project_id' => $task->project_id,
-        ]);
-        $subtask->creator()->associate($request->user());
-        $subtask->save();
+        $task->addSubtask($validated['title'], $request->user());
 
         return redirect()
             ->route('projects.show', $task->project)

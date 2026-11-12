@@ -6,6 +6,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SubtaskController;
 use App\Http\Controllers\BriefingController;
 use App\Http\Controllers\ToggleTaskController;
+use App\Http\Controllers\GenerateSubtasksController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('projects.tasks', TaskController::class)->shallow()->except('index');
     Route::post('tasks/{task}/subtasks', [SubtaskController::class, 'store'])->name('tasks.subtasks.store');
     Route::patch('tasks/{task}/toggle', ToggleTaskController::class)->name('tasks.toggle');
+    Route::post('tasks/{task}/subtasks/generate', GenerateSubtasksController::class)->name('tasks.subtasks.generate');
     Route::post('/briefing', BriefingController::class)->name('briefing');
 });
 

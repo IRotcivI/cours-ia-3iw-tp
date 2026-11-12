@@ -116,6 +116,14 @@
                         Nouvelle tâche
                     </a>
                 @endcan
+
+                <form action="{{ route('tasks.subtasks.generate', $task) }}" method="POST" class="mt-2 ml-4"
+                    onsubmit="this.querySelector('button').disabled = true; this.querySelector('button').innerText = 'Réflexion en cours…';">
+                    @csrf
+                    <button type="submit" class="text-sm text-purple-600 hover:underline disabled:opacity-50">
+                        ✨ Suggérer des sous-tâches
+                    </button>
+                </form>
             </div>
         </div>
     </div>

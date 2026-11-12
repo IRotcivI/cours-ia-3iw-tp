@@ -25,6 +25,7 @@ class SubtaskGenerator implements Agent, Conversational, HasStructuredOutput, Ha
         return "Tu es un assistant de gestion de projet. "
             . "À partir d'une tâche, tu proposes entre 3 et 5 sous-tâches concrètes et actionnables. "
             . "Chaque sous-tâche commence par un verbe à l'infinitif et fait moins de 80 caractères. "
+            . "Tu ne reprends pas des sous-tâches qui existent déjà. "
             . "Tu réponds toujours en français.";
     }
 
@@ -54,7 +55,7 @@ class SubtaskGenerator implements Agent, Conversational, HasStructuredOutput, Ha
     public function schema(JsonSchema $schema): array
     {
         return [
-            'value' => $schema->string()->required(),
+            'subtasks' => $schema->array()->items($schema->string())->required(),
         ];
     }
 }
