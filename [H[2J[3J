@@ -1,0 +1,77 @@
+[90m= [39m[34;4mLaravel\Ai\Responses\AgentResponse[39;24m {#8390
+    +[1mmessages[22m: [34;4mIlluminate\Support\Collection[39;24m {#8394
+      [34mall[39m: [
+        [34;4mLaravel\Ai\Messages\AssistantMessage[39;24m {#8376
+          +[1mrole[22m: [34;4mLaravel\Ai\Messages\MessageRole[39;24m {#8348
+            +[1mname[22m: [32m"[39m[32mAssistant[39m[32m"[39m,
+            +[1mvalue[22m: [32m"[39m[32massistant[39m[32m"[39m,
+          },
+          +[1mcontent[22m: [32m"[39m[32mAh, Alice ! Attention, ta maquette pour le site web est en retard et doit être finie rapidement. Ensuite, choisis les couleurs d'ici demain pour ne pas louper cette échéance. Si tu as du temps, pense aux spécifications de l'appli mobile. Commence par la maquette du site web pour éviter d'accumuler encore plus de retard. Bonne chance ![39m[32m"[39m,
+          +[1mtoolCalls[22m: [34;4mIlluminate\Support\Collection[39;24m {#8377
+            [34mall[39m: [],
+          },
+          +[1mreplayBlocks[22m: [],
+          +[1mreplayBlocksProvider[22m: [36mnull[39m,
+        },
+      ],
+    },
+    +[1mtoolCalls[22m: [34;4mIlluminate\Support\Collection[39;24m {#8361
+      [34mall[39m: [],
+    },
+    +[1mtoolResults[22m: [34;4mIlluminate\Support\Collection[39;24m {#8403
+      [34mall[39m: [],
+    },
+    +[1msteps[22m: [34;4mIlluminate\Support\Collection[39;24m {#8359
+      [34mall[39m: [
+        [34;4mLaravel\Ai\Responses\Data\Step[39;24m {#8357
+          +[1mtext[22m: [32m"[39m[32mAh, Alice ! Attention, ta maquette pour le site web est en retard et doit être finie rapidement. Ensuite, choisis les couleurs d'ici demain pour ne pas louper cette échéance. Si tu as du temps, pense aux spécifications de l'appli mobile. Commence par la maquette du site web pour éviter d'accumuler encore plus de retard. Bonne chance ![39m[32m"[39m,
+          +[1mtoolCalls[22m: [],
+          +[1mtoolResults[22m: [],
+          +[1mfinishReason[22m: [34;4mLaravel\Ai\Responses\Data\FinishReason[39;24m {#8362
+            +[1mname[22m: [32m"[39m[32mStop[39m[32m"[39m,
+            +[1mvalue[22m: [32m"[39m[32mstop[39m[32m"[39m,
+          },
+          +[1musage[22m: [34;4mLaravel\Ai\Responses\Data\TextUsage[39;24m {#8365
+            +[1minputTokens[22m: [35m256[39m,
+            +[1moutputTokens[22m: [35m89[39m,
+            +[1mcacheReadInputTokens[22m: [35m0[39m,
+            +[1mcacheWriteInputTokens[22m: [36mnull[39m,
+            +[1mreasoningTokens[22m: [36mnull[39m,
+          },
+          +[1mmeta[22m: [34;4mLaravel\Ai\Responses\Data\Meta[39;24m {#8370
+            +[1mcitations[22m: [34;4mIlluminate\Support\Collection[39;24m {#8374
+              [34mall[39m: [],
+            },
+            +[1mprovider[22m: [32m"[39m[32mlocal[39m[32m"[39m,
+            +[1mmodel[22m: [32m"[39m[32mqwen2.5:7b[39m[32m"[39m,
+          },
+          +[1mreasoning[22m: [32m""[39m,
+          +[1mreplayBlocks[22m: [],
+          +[1mproviderToolCalls[22m: [],
+          +[1mraw[22m: [34;4mIlluminate\Http\Client\Response[39;24m {#8375
+            +[1mcookies[22m: [34;4mGuzzleHttp\Cookie\CookieJar[39;24m {#8395},
+            +[1mtransferStats[22m: [34;4mGuzzleHttp\TransferStats[39;24m {#8418},
+          },
+        },
+      ],
+    },
+    +[1mpendingApprovals[22m: [34;4mIlluminate\Support\Collection[39;24m {#8372
+      [34mall[39m: [],
+    },
+    +[1mreasoning[22m: [32m""[39m,
+    +[1mtext[22m: [32m"[39m[32mAh, Alice ! Attention, ta maquette pour le site web est en retard et doit être finie rapidement. Ensuite, choisis les couleurs d'ici demain pour ne pas louper cette échéance. Si tu as du temps, pense aux spécifications de l'appli mobile. Commence par la maquette du site web pour éviter d'accumuler encore plus de retard. Bonne chance ![39m[32m"[39m,
+    +[1musage[22m: [34;4mLaravel\Ai\Responses\Data\TextUsage[39;24m {#8406
+      +[1minputTokens[22m: [35m256[39m,
+      +[1moutputTokens[22m: [35m89[39m,
+      +[1mcacheReadInputTokens[22m: [35m0[39m,
+      +[1mcacheWriteInputTokens[22m: [36mnull[39m,
+      +[1mreasoningTokens[22m: [36mnull[39m,
+    },
+    +[1mmeta[22m: [34;4mLaravel\Ai\Responses\Data\Meta[39;24m {#8370},
+    +[1mraw[22m: [34;4mIlluminate\Http\Client\Response[39;24m {#8375},
+    +[1minvocationId[22m: [32m"[39m[32m01a1cb69-e740-724e-8404-95a8443c6bf1[39m[32m"[39m,
+    +[1mconversationId[22m: [36mnull[39m,
+    +[1mconversationUser[22m: [36mnull[39m,
+    +[1muserMessageId[22m: [36mnull[39m,
+    +[1massistantMessageId[22m: [36mnull[39m,
+  }
