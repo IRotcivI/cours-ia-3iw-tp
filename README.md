@@ -1,58 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# To-do list augmentée par l'IA
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Application Laravel de gestion de projets et de tâches, avec deux fonctionnalités
+d'intelligence artificielle qui tournent **en local** grâce à Ollama :
 
-## About Laravel
+## Prérequis
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Outil | Version |
+| --- | --- |
+| PHP | 8.3 ou plus |
+| Composer | 2 |
+| Node.js | 20.19 ou plus |
+| Ollama | avec le modèle `qwen2.5:7b` (ou `qwen2.5:3b`) |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+La base de données est **SQLite** : aucun serveur à installer.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Installation
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/IRotcivI/cours-ia-3iw-tp.git
+cd cours-ia-3iw-tp
 
-php artisan boost:install
+composer install
+npm install
+npm run build
+
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Configurer le modèle
 
-## Contributing
+À la fin du fichier `.env`, vérifiez les deux lignes suivantes :
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```env
+LOCAL_AI_URL=http://localhost:11434/v1
+LOCAL_AI_MODEL=qwen2.5:7b
+```
 
-## Code of Conduct
+Le nom du modèle doit être **exactement** celui affiché par `ollama list`
+(remplacez par `qwen2.5:3b` si c'est celui qui est installé). Puis :
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan config:clear
+```
 
-## Security Vulnerabilities
+## Créer la base avec les données de démonstration
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate:fresh --seeder=DemoSeeder
+```
 
-## License
+Si Laravel propose de créer le fichier `database/database.sqlite`, répondez `yes`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Les dates sont calculées par rapport au jour où la commande est lancée : relancez-la
+juste avant la démonstration pour que la tâche « Envoyer le devis au client » soit
+bien en retard.
+
+## Lancer l'application
+
+```bash
+ollama serve
+php artisan serve
+```
+
+L'application est disponible sur <http://localhost:8000>.
+
+## Comptes de démonstration
+
+Mot de passe pour tous les comptes : **`password`**
+
+| Compte | Rôle dans les projets |
+| --- | --- |
+| **`alice@demo.fr`** | **compte principal de la démo** : owner de « Refonte du site vitrine », editor de « Application mobile », viewer de « Séminaire » |
+| `bob@demo.fr` | owner de « Application mobile », editor de « Refonte du site vitrine » |
+| `chloe@demo.fr` | owner de « Séminaire », viewer de « Refonte du site vitrine » |
+| `david@demo.fr` | editor de « Séminaire », viewer de « Application mobile » |
+
+## Parcours de démonstration conseillé
+
+1. Se connecter avec **`alice@demo.fr`** / **`password`**.
+2. Sur le **Dashboard**, cliquer sur **« ✨ Générer mon résumé »**. La tâche en
+   retard est citée en premier. La réponse prend quelques secondes.
+3. Ouvrir le projet **« Refonte du site vitrine »**, puis cliquer sur
+   **« ✨ Suggérer des sous-tâches »** sous la tâche **« Préparer la démo de
+   vendredi »**.
+4. Ouvrir le projet **« Organisation du séminaire d'équipe »** : Alice n'y est que
+   `viewer`, elle voit tout mais aucun bouton d'action n'est proposé.
